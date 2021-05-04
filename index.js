@@ -26,9 +26,9 @@ playMemoryTest(10) should show and ask for 10 numbers
 
 
 // Show the user 4 random numbers between 1 and 100
-function showUserRandomNumbers (){
+function showUserRandomNumbers (number){
  let arrayToShowUser = []
-while( arrayToShowUser.length < 4) {
+while( arrayToShowUser.length < number) {
  let randomNumber = Math.floor(Math.random() * 100) + 1
  if(arrayToShowUser.indexOf(randomNumber) === -1) arrayToShowUser.push(randomNumber)
 }
@@ -36,12 +36,19 @@ return arrayToShowUser
 }
 // console.log(showUserRandomNumbers())
 // After 15 seconds, ask them to enter each number in order
-
+let ordinality = ['st', 'nd', 'rd']
+function pushTh (number) {
+ for(let i = 0; i <= number - 3; i++){
+  ordinality.push('th')
+ }
+}
  // funtion to ask user of numbers they saw
- function whatNumbersDidYouSee (){
+ function whatNumbersDidYouSee (number){
   let numberUserSaw = []
-   for(let i = 0; i  < 4; i++){
-    let numberUserTyped = Number(prompt("What was the numbers you saw"))
+  if(number > 3) {pushTh(number)}
+   for(let i = 0; i  < number; i++){
+    let postNumber = ordinality[i]
+    let numberUserTyped = Number(prompt(`Enter the ${i+1}${postNumber} number?`))
     numberUserSaw.push(numberUserTyped)
    }
    return numberUserSaw
@@ -58,12 +65,12 @@ return arrayToShowUser
  }
 
 
-  function myMemoryTest() {
-  let randomNumbers =  showUserRandomNumbers()
+  function myMemoryTest(number) {
+  let randomNumbers =  showUserRandomNumbers(number)
   alert(randomNumbers)
   setTimeout(function (){
 
-    let userAnswers = whatNumbersDidYouSee()
+    let userAnswers = whatNumbersDidYouSee(number)
    let rightAnswers  = comparedAnswers(randomNumbers,userAnswers)
    alert(`You guessed ${rightAnswers} numbers corect`)
   }, 1000)
@@ -71,7 +78,7 @@ return arrayToShowUser
  }
  // pass that function to a 15 sec timeout
  // capture the user input
- myMemoryTest()
+ myMemoryTest(5)
 console.log("I am after the alert")
 
 
