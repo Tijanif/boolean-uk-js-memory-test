@@ -26,5 +26,17 @@ playMemoryTest(10) should show and ask for 10 numbers
 
 
 // Show the user 4 random numbers between 1 and 100
+function playMemoryTest (){
+ let arrayToShowUser = []
+while( arrayToShowUser.length < 4) {
+ let randomNumber = Math.floor(Math.random() * 100) + 1
+ if(arrayToShowUser.indexOf(randomNumber) === -1) arrayToShowUser.push(randomNumber)
+}
+return alert(arrayToShowUser)
+}
+
+
+const intervalID = setInterval(playMemoryTest, 15000,);
+
 // After 15 seconds, ask them to enter each number in order
 // Let them know how many they got right!
